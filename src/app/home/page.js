@@ -814,7 +814,7 @@ function Home() {
         }
 
         .hero-title {
-          font-size: clamp(2.5rem, 5vw, 3.5rem);
+          font-size: clamp(2.4rem, 5vw, 3.5rem);
           font-weight: 800;
           line-height: 1.2;
           margin-bottom: 1.5rem;
@@ -1690,6 +1690,13 @@ function Home() {
           .hero-title {
             font-size: 2rem;
           }
+          .hero-subtitle {
+          font-size: 1.20rem;
+          line-height: 1.6;
+          color: var(--text-light);
+          max-width: 700px;
+          margin: 0 auto 2.5rem;
+        }
 
           .hero-actions,
           .cta-actions {

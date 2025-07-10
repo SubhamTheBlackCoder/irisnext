@@ -1,0 +1,180 @@
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #ffffff;
+  color: #111827;
+  overflow: auto;
+}
+
+.splash-wrapper {
+  position: relative;
+  min-height: 100vh;
+}
+
+.splash-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.splash-inner {
+  text-align: center;
+  position: relative;
+  padding: 2rem;
+  max-width: 800px;
+  pointer-events: auto;
+}
+
+.splash-title {
+  font-size: 4rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.03em;
+  color: #111827;
+}
+
+.letter {
+  display: inline-block;
+}
+
+.highlight {
+  color: #4f46e5;
+  background: linear-gradient(90deg, #4f46e5, #7c3aed);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  line-height: 1;
+  transform-origin: 50% 50%;
+}
+
+.splash-subtitle {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #6b7280;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  letter-spacing: 0.02em;
+}
+
+.loading-dots {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  gap: 12px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background: #4f46e5;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+}
+
+.progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #4f46e5, #7c3aed);
+  border-radius: 3px;
+  will-change: width;
+}
+
+.splash-spacer {
+  height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .splash-title {
+    font-size: 3rem;
+  }
+  .splash-subtitle {
+    font-size: 1rem;
+  }
+}/* Add to existing SplashScreen.css */
+.logo-container {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.splash-logo {
+  width: 80px; /* Adjust based on your logo's aspect ratio */
+  height: 80px; /* Adjust based on your logo's aspect ratio */
+  
+  padding: 8px; /* Gives some breathing room */
+}
+/* SplashScreen.css */
+.splash-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff; /* Clean white background */
+  z-index: 9999;
+}
+
+.splash-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.logo-container {
+  margin-bottom: 40px;
+}
+
+.splash-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  
+}
+
+.loading-dots {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background: #4f46e5; /* Professional purple accent */
+  border-radius: 50%;
+  margin: 0 5px;
+}
+
+.powered-by {
+  position: absolute;
+  bottom: 40px;
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+  text-align: center;
+}
+
+.irisnex-text {
+  font-weight: 600;
+  color: #4f46e5; /* Matching accent color */
+  margin-left: 4px;
+}

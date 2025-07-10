@@ -312,9 +312,14 @@ const AuthPage = () => {
   const [showTermsModal, setShowTermsModal] = useState(false);
   const [isProcessingSSO, setIsProcessingSSO] = useState(false);
   const [initialCheckComplete, setInitialCheckComplete] = useState(false);
+  const [isClient, setIsClient] = useState(false); // New state for client detection
 
   const router = useRouter();
   const { loginSuccess, isAuthenticated } = useAuth();
+
+  useEffect(() => {
+    setIsClient(true); // Set to true when component mounts on client
+  }, []);
 
   // Terms content
   const termsContent = [
@@ -425,27 +430,31 @@ const AuthPage = () => {
       }
     };
 
-    checkForSSO();
+    if (isClient) { // Only run on client
+      checkForSSO();
+    }
 
     return () => {
       setIsLoading(false);
       setIsProcessingSSO(false);
     };
-  }, [router]);
+  }, [router, isClient]); // Added isClient dependency
 
   // Redirect to main page if authenticated and not forcing terms acceptance
-useEffect(() => {
-  if (initialCheckComplete && isAuthenticated && !forceTermsAcceptance) {
-    router.push("/upload");
-  }
-}, [initialCheckComplete, isAuthenticated, forceTermsAcceptance, router]);
+  useEffect(() => {
+    if (initialCheckComplete && isAuthenticated && !forceTermsAcceptance) {
+      router.push("/upload");
+    }
+  }, [initialCheckComplete, isAuthenticated, forceTermsAcceptance, router]);
 
-// ⛔ Prevent rendering the login form while redirecting
-if (initialCheckComplete && isAuthenticated && !forceTermsAcceptance) {
-  return null;
-}
+  // Prevent rendering while redirecting
+  if (initialCheckComplete && isAuthenticated && !forceTermsAcceptance) {
+    return null;
+  }
 
   const loginWithGoogle = () => {
+    if (!isClient) return; // Guard against server execution
+    
     // Generate random state and code verifier for PKCE
     const state = Math.random().toString(36).substring(2, 15);
     const codeVerifier = Math.random().toString(36).substring(2, 15) + 
@@ -1111,18 +1120,21 @@ if (initialCheckComplete && isAuthenticated && !forceTermsAcceptance) {
                     <span>OR</span>
                   </motion.div>
 
-                  <GoogleButton
-                    type="button"
-                    onClick={loginWithGoogle}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.7 }}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <GoogleIcon />
-                    Sign in with Google
-                  </GoogleButton>
+                  {/* Only render GoogleButton on client */}
+                  {isClient && (
+                    <GoogleButton
+                      type="button"
+                      onClick={loginWithGoogle}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.7 }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <GoogleIcon />
+                      Sign in with Google
+                    </GoogleButton>
+                  )}
 
                   <motion.button
                     type="button"
@@ -1244,18 +1256,21 @@ if (initialCheckComplete && isAuthenticated && !forceTermsAcceptance) {
                     <span>OR</span>
                   </motion.div>
 
-                  <GoogleButton
-                    type="button"
-                    onClick={loginWithGoogle}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6 }}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <GoogleIcon />
-                    Sign up with Google
-                  </GoogleButton>
+                  {/* Only render GoogleButton on client */}
+                  {isClient && (
+                    <GoogleButton
+                      type="button"
+                      onClick={loginWithGoogle}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.6 }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <GoogleIcon />
+                      Sign up with Google
+                    </GoogleButton>
+                  )}
 
                   <motion.div
                     className="auth-footer"
